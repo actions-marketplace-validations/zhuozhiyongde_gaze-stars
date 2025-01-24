@@ -42,10 +42,11 @@ runs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         cd ..
+        mv gaze-stars/Stargazer.py .
       shell: bash
 
     - name: Run Stargazer
-      run: python gaze-stars/Stargazer.py
+      run: python Stargazer.py
       shell: bash
       env:
         GITHUB_TOKEN: ${{ inputs.api-token }}
