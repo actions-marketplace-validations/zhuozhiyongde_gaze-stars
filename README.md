@@ -4,8 +4,6 @@ This GitHub Action queries the GitHub API to retrieve your starred repositories 
 
 You can reference my repository [zhuozhiyongde / Stargazer](https://github.com/zhuozhiyongde/Stargazer)
 
-## Table of Contents
-
 ## Documentation
 
 ### Prerequisites

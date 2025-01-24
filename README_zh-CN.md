@@ -4,8 +4,6 @@
 
 你可以参考我的仓库 [zhuozhiyongde / Stargazer](https://github.com/zhuozhiyongde/Stargazer)
 
-## 目录
-
 ## 文档
 
 ### 前置要求
