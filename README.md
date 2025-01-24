@@ -15,7 +15,7 @@ You can reference my repository [zhuozhiyongde / Stargazer](https://github.com/z
 
 | Variable          | Description                                                    | Default                                    |
 | ----------------- | -------------------------------------------------------------- | ------------------------------------------ |
-| `api-token`       | Personal GitHub API token to avoid rate limits [Learn more](#api-token) | `${{ secrets.API_TOKEN }}`                 |
+| `api-token`       | Personal GitHub API token to avoid rate limits [Learn more](#api-token) | /                 |
 | `github-username` | GitHub username for generating starred list                   | /                                          |
 | `git-name`        | Name used for Git commits                                      | `Github Action`                            |
 | `git-email`       | Email used for Git commits                                     | `actions@users.noreply.github.com`         |

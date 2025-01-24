@@ -15,7 +15,7 @@
 
 | Variable          | Description                                                    | Default                                    |
 | ----------------- | -------------------------------------------------------------- | ------------------------------------------ |
-| `api-token`       | 个人 GitHub API 密钥，用于避免速率限制，[了解更多](#api-token) | `${{ secrets.API_TOKEN }}`                 |
+| `api-token`       | 个人 GitHub API 密钥，用于避免速率限制，[了解更多](#api-token) | /                                          |
 | `github-username` | 生成星标列表的 GitHub 用户名                                   | /                                          |
 | `git-name`        | 用于 Git 提交的名称                                            | `Github Action`                            |
 | `git-email`       | 用于 Git 提交的邮箱                                            | `actions@users.noreply.github.com`         |
