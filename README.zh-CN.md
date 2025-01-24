@@ -31,7 +31,7 @@
 
 您需要生成一个 [个人 API 令牌](https://github.com/settings/tokens/new)，然后在仓库的 `Settings -> Secrets and variables -> Actions -> Secrets -> Repository secrets` 中添加。
 
-请注意，由于需要提交最终的 `README.md 到你的仓库，你还需要在 `Settings -> Security -> Actions -> General -> Actions permissions -> Workflow permissions`中启用`Read and write permissions` 权限。
+请注意，由于需要提交最终的 `README.md` 到你的仓库，你还需要在 `Settings -> Security -> Actions -> General -> Actions permissions -> Workflow permissions` 中启用 `Read and write permissions` 权限。
 
 #### `template-path`
 
@@ -49,27 +49,27 @@
 name: Stargazer
 
 on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
-  schedule:
-    - cron: "0 0 * * *"
+    push:
+        branches:
+            - main
+    workflow_dispatch:
+    schedule:
+        - cron: '0 0 * * *'
 
 jobs:
-  stargazer:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Stargazer
-        uses: zhuozhiyongde/gaze-stars@latest
-        with:
-          api-token: ${{ secrets.API_TOKEN }}
-          github-username: ${{ github.repository_owner }}
-          git-name: Github Action
-          git-email: actions@users.noreply.github.com
-          git-message: 'chore(updates): updated entries in files'
-          template-path: template/template.md
-          output-path: README.md
+    stargazer:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Stargazer
+              uses: zhuozhiyongde/gaze-stars@latest
+              with:
+                  api-token: ${{ secrets.API_TOKEN }}
+                  github-username: ${{ github.repository_owner }}
+                  git-name: Github Action
+                  git-email: actions@users.noreply.github.com
+                  git-message: 'chore(updates): updated entries in files'
+                  template-path: template/template.md
+                  output-path: README.md
 ```
 
 ## 许可证
