@@ -1,0 +1,73 @@
+# 🌟 gaze-stars
+
+这个 GitHub Action 可以通过查询 GitHub API 以获取你标星的仓库们，然后按星标列表排序生成 README。
+
+你可以参考我的仓库 [zhuozhiyongde / Stargazer](https://github.com/zhuozhiyongde/Stargazer)
+
+## 目录
+
+## 文档
+
+### 前置要求
+
+-   一个空仓库
+-   一个个人 GitHub API 密钥
+
+### 配置方法
+
+| Variable          | Description                                                    | Default                            |
+| ----------------- | -------------------------------------------------------------- | ---------------------------------- |
+| `api-token`       | 个人 GitHub API 密钥，用于避免速率限制，[了解更多](#api-token) | `${{ secrets.API_TOKEN }}`         |
+| `github-username` | 生成星标列表的 GitHub 用户名                                   | /                                  |
+| `git-name`        | 用于 Git 提交的名称                                            | `Github Action`                    |
+| `git-email`       | 用于 Git 提交的邮箱                                            | `actions@users.noreply.github.com` |
+| `template-path`   | 自定义 `README.md` 模板，[了解更多](#template-path)            | `template/template.md`             |
+| `output-path`     | 输出文件名                                                     | `README.md`                        |
+
+#### `api-token`
+
+个人 API 访问令牌是从 API 获取星标而不触发速率限制的必需项。
+
+您需要生成一个 [个人 API 令牌](https://github.com/settings/tokens/new)，然后在仓库的 `Settings -> Secrets and variables -> Actions -> Secrets -> Repository secrets` 中添加。
+
+#### `template-path`
+
+默认模板路径为 `template/template.md`，您可以自定义模板路径，模板路径为相对路径，相对于仓库根目录。
+
+生成 README 时，生成的内容会替换模板中的 `[[GENERATE HERE]]` 字样，对于其他部分不会有变动，所以你可以根据需要自定义模板。
+
+#### `output-path`
+
+默认输出文件名 `README.md`，您可以自定义输出文件名，输出文件名相对于仓库根目录。
+
+## 示例
+
+```yml
+name: Stargazer
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  stargazer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Stargazer
+        uses: zhuozhiyongde/gaze-stars@latest
+        with:
+          api-token: ${{ secrets.API_TOKEN }}
+          github-username: ${{ github.repository_owner }}
+          git-name: Github Action
+          git-email: actions@users.noreply.github.com
+          template-path: template/template.md
+          output-path: README.md
+```
+
+## 许可证
+
+[MIT](LICENSE)

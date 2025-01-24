@@ -1,0 +1,54 @@
+name: 'Stargazer'
+description: 'Generate starred list of yourself.'
+author: 'zhuozhiyongde'
+branding:
+  icon: 'star'
+  color: 'blue'
+
+inputs:
+  api-token:
+    description: 'Personal GitHub API token to avoid rate limits'
+    required: true
+  github-username:
+    description: 'GitHub username to generate starred list for'
+    required: true
+  git-name:
+    description: 'Name used for Git commits'
+    default: 'Github Action'
+  git-email:
+    description: 'Email used for Git commits'
+    default: 'actions@users.noreply.github.com'
+  template-path:
+    description: 'Path to custom README template'
+    default: 'template/template.md'
+  output-path:
+    description: 'Output file path'
+    default: 'README.md'
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: "3.10"
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run Stargazer
+      run: python Stargazer.py
+
+    - name: Commit and push changes
+      run: |
+        git config --global user.name "${{ inputs.git-name }}"
+        git config --global user.email "${{ inputs.git-email }}"
+        git add README.md
+        git commit -m "chore(updates): updated entries in files"
+        git push
+      env:
+        GITHUB_TOKEN: ${{ inputs.api-token }}
