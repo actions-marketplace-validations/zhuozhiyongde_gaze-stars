@@ -15,20 +15,23 @@
 
 ### 配置方法
 
-| Variable          | Description                                                    | Default                            |
-| ----------------- | -------------------------------------------------------------- | ---------------------------------- |
-| `api-token`       | 个人 GitHub API 密钥，用于避免速率限制，[了解更多](#api-token) | `${{ secrets.API_TOKEN }}`         |
-| `github-username` | 生成星标列表的 GitHub 用户名                                   | /                                  |
-| `git-name`        | 用于 Git 提交的名称                                            | `Github Action`                    |
-| `git-email`       | 用于 Git 提交的邮箱                                            | `actions@users.noreply.github.com` |
-| `template-path`   | 自定义 `README.md` 模板，[了解更多](#template-path)            | `template/template.md`             |
-| `output-path`     | 输出文件名                                                     | `README.md`                        |
+| Variable          | Description                                                    | Default                                    |
+| ----------------- | -------------------------------------------------------------- | ------------------------------------------ |
+| `api-token`       | 个人 GitHub API 密钥，用于避免速率限制，[了解更多](#api-token) | `${{ secrets.API_TOKEN }}`                 |
+| `github-username` | 生成星标列表的 GitHub 用户名                                   | /                                          |
+| `git-name`        | 用于 Git 提交的名称                                            | `Github Action`                            |
+| `git-email`       | 用于 Git 提交的邮箱                                            | `actions@users.noreply.github.com`         |
+| `git-message`     | 用于 Git 提交的提交信息                                        | `chore(updates): updated entries in files` |
+| `template-path`   | 自定义 `README.md` 模板，[了解更多](#template-path)            | `template/template.md`                     |
+| `output-path`     | 输出文件名                                                     | `README.md`                                |
 
 #### `api-token`
 
 个人 API 访问令牌是从 API 获取星标而不触发速率限制的必需项。
 
 您需要生成一个 [个人 API 令牌](https://github.com/settings/tokens/new)，然后在仓库的 `Settings -> Secrets and variables -> Actions -> Secrets -> Repository secrets` 中添加。
+
+请注意，由于需要提交最终的 `README.md 到你的仓库，你还需要在 `Settings -> Security -> Actions -> General -> Actions permissions -> Workflow permissions`中启用`Read and write permissions` 权限。
 
 #### `template-path`
 
@@ -64,6 +67,7 @@ jobs:
           github-username: ${{ github.repository_owner }}
           git-name: Github Action
           git-email: actions@users.noreply.github.com
+          git-message: 'chore(updates): updated entries in files'
           template-path: template/template.md
           output-path: README.md
 ```

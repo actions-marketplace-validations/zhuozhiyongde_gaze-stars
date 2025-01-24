@@ -3,7 +3,7 @@ description: 'Generate starred list of yourself.'
 author: 'zhuozhiyongde'
 branding:
   icon: 'star'
-  color: 'blue'
+  color: 'yellow'
 
 inputs:
   api-token:
@@ -18,6 +18,9 @@ inputs:
   git-email:
     description: 'Email used for Git commits'
     default: 'actions@users.noreply.github.com'
+  git-message:
+    description: 'Commit message'
+    default: 'chore(updates): updated entries in files'
   template-path:
     description: 'Path to custom README template'
     default: 'template/template.md'
@@ -58,7 +61,7 @@ runs:
     - name: Commit and push changes
       run: |
         git add README.md
-        git commit -m "chore(updates): updated entries in files"
+        git commit -m "${{ inputs.git-message }}"
         git push
       shell: bash
       env:
