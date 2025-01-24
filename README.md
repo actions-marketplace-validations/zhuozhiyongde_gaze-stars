@@ -1,5 +1,7 @@
 # 🌟 gaze-stars
 
+[English](README.md) | [中文版](README.zh-CN.md)
+
 This GitHub Action queries the GitHub API to retrieve your starred repositories and generates a README sorted by your stargazed list.
 
 You can reference my repository [zhuozhiyongde / Stargazer](https://github.com/zhuozhiyongde/Stargazer)

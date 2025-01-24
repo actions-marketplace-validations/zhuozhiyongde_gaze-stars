@@ -1,5 +1,7 @@
 # 🌟 gaze-stars
 
+[English](README.md) | [中文版](README.zh-CN.md)
+
 这个 GitHub Action 可以通过查询 GitHub API 以获取你标星的仓库们，然后按星标列表排序生成 README。
 
 你可以参考我的仓库 [zhuozhiyongde / Stargazer](https://github.com/zhuozhiyongde/Stargazer)
