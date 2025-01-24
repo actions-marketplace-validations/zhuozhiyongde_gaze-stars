@@ -39,10 +39,11 @@ runs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+      shell: bash
 
     - name: Run Stargazer
       run: python Stargazer.py
-
+      shell: bash
     - name: Commit and push changes
       run: |
         git config --global user.name "${{ inputs.git-name }}"
@@ -50,5 +51,6 @@ runs:
         git add README.md
         git commit -m "chore(updates): updated entries in files"
         git push
+      shell: bash
       env:
         GITHUB_TOKEN: ${{ inputs.api-token }}
