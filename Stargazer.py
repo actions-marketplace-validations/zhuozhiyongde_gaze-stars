@@ -16,10 +16,10 @@ import requests
 
 class Stargazer:
     def __init__(self):
-        self.username = os.getenv("INPUT_GITHUB-USERNAME")
-        self.token = os.getenv("INPUT_GITHUB-TOKEN")
-        self.template = os.getenv("INPUT_TEMPLATE-PATH", "template/template.md")
-        self.output = os.getenv("INPUT_OUTPUT-PATH", "README.md")
+        self.username = os.getenv("GITHUB_USERNAME")
+        self.token = os.getenv("GITHUB_TOKEN")
+        self.template = os.getenv("TEMPLATE_PATH", "template/template.md")
+        self.output = os.getenv("OUTPUT_PATH", "README.md")
         self.star_lists = []
         self.star_list_repos = {}
         self.data = {}
