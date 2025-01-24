@@ -37,17 +37,21 @@ runs:
 
     - name: Install dependencies
       run: |
+        git config --global user.name "${{ inputs.git-name }}"
+        git config --global user.email "${{ inputs.git-email }}"
+        git clone https://github.com/zhuozhiyongde/gaze-stars.git
+        cd gaze-stars
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+        cd ..
       shell: bash
 
     - name: Run Stargazer
-      run: python Stargazer.py
+      run: python gaze-stars/Stargazer.py
       shell: bash
+
     - name: Commit and push changes
       run: |
-        git config --global user.name "${{ inputs.git-name }}"
-        git config --global user.email "${{ inputs.git-email }}"
         git add README.md
         git commit -m "chore(updates): updated entries in files"
         git push
