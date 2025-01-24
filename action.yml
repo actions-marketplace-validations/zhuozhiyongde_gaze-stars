@@ -28,6 +28,8 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - uses: actions/checkout@v2
+
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
@@ -42,11 +44,10 @@ runs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         cd ..
-        mv gaze-stars/Stargazer.py .
       shell: bash
 
     - name: Run Stargazer
-      run: python Stargazer.py
+      run: python gaze-stars/Stargazer.py
       shell: bash
       env:
         GITHUB_TOKEN: ${{ inputs.api-token }}
