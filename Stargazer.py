@@ -86,7 +86,10 @@ class Stargazer:
             text += f"## {list_name}\n\n"
             for user, repo in self.star_list_repos[list_url]:
                 key = f"{user}/{repo}"
-                assert key in self.data, f"{key} not in self.data"
+                if key not in self.data:
+                    print(f"{key} not in self.data")
+                    self.data[key]["listed"] = True
+                    continue
 
                 if not self.data[key]["listed"]:
                     self.data[key]["listed"] = True
