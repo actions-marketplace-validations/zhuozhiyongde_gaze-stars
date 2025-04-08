@@ -88,7 +88,6 @@ class Stargazer:
                 key = f"{user}/{repo}"
                 if key not in self.data:
                     print(f"{key} not in self.data")
-                    self.data[key]["listed"] = True
                     continue
 
                 if not self.data[key]["listed"]:
