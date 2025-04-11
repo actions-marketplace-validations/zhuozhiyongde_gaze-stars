@@ -21,6 +21,9 @@ inputs:
   git-message:
     description: 'Commit message'
     default: 'chore(updates): updated entries in files'
+  sort-by:
+    description: 'Sort by'
+    default: 'stars'
   template-path:
     description: 'Path to custom README template'
     default: 'template/template.md'
