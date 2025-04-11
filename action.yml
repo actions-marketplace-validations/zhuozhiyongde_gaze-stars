@@ -29,28 +29,30 @@ inputs:
     default: 'README.md'
 
 runs:
-  using: "composite"
+  using: 'composite'
   steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
+      with:
+        path: './code'
 
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v5
       with:
-        python-version: "3.10"
+        python-version: '3.10'
 
     - name: Install dependencies
       run: |
         git config --global user.name "${{ inputs.git-name }}"
         git config --global user.email "${{ inputs.git-email }}"
-        git clone https://github.com/zhuozhiyongde/gaze-stars.git
         cd gaze-stars
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        cd ..
       shell: bash
 
     - name: Run Stargazer
-      run: python gaze-stars/Stargazer.py
+      run: |
+        cd code
+        python ../gaze-stars/Stargazer.py
       shell: bash
       env:
         GITHUB_TOKEN: ${{ inputs.api-token }}
@@ -60,6 +62,7 @@ runs:
 
     - name: Commit and push changes
       run: |
+        cd code
         git add README.md
         if ! git diff-index --quiet HEAD --; then
           git commit -m "${{ inputs.git-message }}"
