@@ -92,7 +92,7 @@ class Stargazer:
             sorted_repos = sorted(repos, key=lambda x: x[1]["stars"], reverse=True)
 
             # 生成表格内容
-            text += f"### {list_name}\n\n"
+            text += f"## {list_name}\n\n"
             text += "| 仓库名称 | 描述 | Star数 |\n"
             text += "|----------|------|-------|\n"
             for key, repo in sorted_repos:
@@ -108,7 +108,7 @@ class Stargazer:
             reverse=True
         )
 
-        text += "### 未分类仓库\n\n"
+        text += "## 未分类仓库\n\n"
         text += "| 仓库名称 | 描述 | Star数 |\n"
         text += "|----------|------|-------|\n"
 
