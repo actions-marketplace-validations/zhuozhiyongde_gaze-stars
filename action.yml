@@ -59,6 +59,7 @@ runs:
         GITHUB_USERNAME: ${{ inputs.github-username }}
         TEMPLATE_PATH: ${{ inputs.template-path }}
         OUTPUT_PATH: ${{ inputs.output-path }}
+        SORT_BY: ${{ inputs.sort-by }}
 
     - name: Commit and push changes
       run: |
