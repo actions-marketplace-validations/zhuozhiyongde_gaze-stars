@@ -9,7 +9,7 @@
 import json
 import os
 import re
-
+from collections import OrderedDict
 import requests
 
 
@@ -19,6 +19,7 @@ class Stargazer:
         self.token = os.getenv("GITHUB_TOKEN")
         self.template = os.getenv("TEMPLATE_PATH", "template/template.md")
         self.output = os.getenv("OUTPUT_PATH", "README.md")
+        self.sort_by = os.getenv("SORT_BY", "stars")
         self.star_lists = []
         self.star_list_repos = {}
         self.data = {}
@@ -40,7 +41,7 @@ class Stargazer:
                     "html_url": repo["html_url"],
                     "description": repo["description"] or "",
                     "listed": False,
-                    "stars": repo["stargazers_count"]
+                    "stars": repo["stargazers_count"],
                 }
             url = response.links.get("next", {}).get("url")
         self.data = all_repos
@@ -61,7 +62,8 @@ class Stargazer:
         page = 1
         while True:
             current_url = url.format(
-                username=self.username, list_name=list_name, page=page)
+                username=self.username, list_name=list_name, page=page
+            )
             response = requests.get(current_url)
             pattern = r'<h3>\s*<a href="[^"]*">\s*<span class="text-normal">(\S+) / </span>(\S+)\s+</a>\s*</h3>'
             match = re.findall(pattern, response.text)
@@ -89,8 +91,12 @@ class Stargazer:
                 for user, repo in self.star_list_repos.get(list_url, [])
                 if f"{user}/{repo}" in self.data
             ]
-            sorted_repos = sorted(repos, key=lambda x: x[1]["stars"], reverse=True)
-
+            # sorted_repos = sorted(repos, key=lambda x: x[1]["stars"], reverse=True)
+            if self.sort_by == "stars":
+                sorted_repos = sorted(repos, key=lambda x: x[1]["stars"], reverse=True)
+            else:
+                # reverse repo
+                sorted_repos = repos[::-1]
             # 生成表格内容
             text += f"## {list_name}\n\n"
             text += "| 仓库名称 | 描述 | Star数 |\n"
@@ -102,11 +108,15 @@ class Stargazer:
             text += "\n"
 
         # 生成未分类表格
-        unlisted = sorted(
-            [key for key in self.data if not self.data[key]["listed"]],
-            key=lambda x: self.data[x]["stars"],
-            reverse=True
-        )
+        if self.sort_by == "stars":
+            unlisted = sorted(
+                [key for key in self.data if not self.data[key]["listed"]],
+                key=lambda x: self.data[x]["stars"],
+                reverse=True,
+            )
+        else:
+            unlisted = [key for key in self.data if not self.data[key]["listed"]]
+            unlisted = unlisted[::-1]
 
         text += "## 未分类仓库\n\n"
         text += "| 仓库名称 | 描述 | Star数 |\n"
@@ -116,7 +126,7 @@ class Stargazer:
             text += "| *所有仓库均已分类* | | |\n"
         else:
             for k in unlisted:
-                desc = self.data[k]['description'].replace('|', '\\|')
+                desc = self.data[k]["description"].replace("|", "\\|")
                 text += f"| [{k}](https://github.com/{k}) | {desc} | ⭐{self.data[k]['stars']} |\n"
 
         text += "\n"
@@ -131,7 +141,7 @@ class Stargazer:
 
 if __name__ == "__main__":
     stargazer = Stargazer()
-    stargazer.get_all_starred()   # 获取所有starred仓库
-    stargazer.get_lists()         # 获取分类列表
-    stargazer.get_all_repos()     # 获取每个分类的仓库
-    stargazer.generate_readme()   # 生成README
+    stargazer.get_all_starred()  # 获取所有starred仓库
+    stargazer.get_lists()  # 获取分类列表
+    stargazer.get_all_repos()  # 获取每个分类的仓库
+    stargazer.generate_readme()  # 生成README

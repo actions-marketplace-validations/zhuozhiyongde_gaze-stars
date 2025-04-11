@@ -22,6 +22,7 @@ You can reference my repository [zhuozhiyongde / Stargazer](https://github.com/z
 | `git-name`        | Name used for Git commits                                      | `Github Action`                            |
 | `git-email`       | Email used for Git commits                                     | `actions@users.noreply.github.com`         |
 | `git-message`     | Commit message for Git commits                                 | `chore(updates): updated entries in files` |
+| `sort-by`         | Sort by `stars` or `updated`                                  | `stars`                                    |
 | `template-path`   | Custom `README.md` template path [Learn more](#template-path)  | `template/template.md`                     |
 | `output-path`     | Output filename                                                | `README.md`                                |
 
@@ -68,6 +69,7 @@ jobs:
           git-name: Github Action
           git-email: actions@users.noreply.github.com
           git-message: 'chore(updates): updated entries in files'
+          sort-by: stars
           template-path: template/template.md
           output-path: README.md
 ```

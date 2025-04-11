@@ -22,6 +22,7 @@
 | `git-name`        | 用于 Git 提交的名称                                            | `Github Action`                            |
 | `git-email`       | 用于 Git 提交的邮箱                                            | `actions@users.noreply.github.com`         |
 | `git-message`     | 用于 Git 提交的提交信息                                        | `chore(updates): updated entries in files` |
+| `sort-by`         | 排序方式，`stars` 或 `updated`                                  | `stars`                                    |
 | `template-path`   | 自定义 `README.md` 模板，[了解更多](#template-path)            | `template/template.md`                     |
 | `output-path`     | 输出文件名                                                     | `README.md`                                |
 
@@ -68,6 +69,7 @@ jobs:
                   git-name: Github Action
                   git-email: actions@users.noreply.github.com
                   git-message: 'chore(updates): updated entries in files'
+                  sort-by: stars
                   template-path: template/template.md
                   output-path: README.md
 ```
