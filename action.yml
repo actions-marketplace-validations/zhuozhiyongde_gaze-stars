@@ -47,6 +47,7 @@ runs:
       run: |
         git config --global user.name "${{ inputs.git-name }}"
         git config --global user.email "${{ inputs.git-email }}"
+        git clone https://github.com/zhuozhiyongde/gaze-stars.git
         cd gaze-stars
         python -m pip install --upgrade pip
         pip install -r requirements.txt
