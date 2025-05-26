@@ -32,7 +32,7 @@ A personal API access token is required to fetch starred repositories through th
 
 You need to generate a [personal API token](https://github.com/settings/tokens/new) and add it under your repository's `Settings -> Secrets and variables -> Actions -> Secrets -> Repository secrets`.
 
-Note: To commit the final `README.md` to your repository, you must also enable `Read and write permissions` under `Settings -> Security -> Actions -> General -> Actions permissions -> Workflow permissions`.
+Note: To commit the final `README.md` to your repository, you must also enable `Read and write permissions` under `Settings -> Code and automation -> Actions -> General -> Actions permissions -> Workflow permissions`.
 
 #### `template-path`
 
