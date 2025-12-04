@@ -81,6 +81,8 @@ class Stargazer:
         return self.star_list_repos
 
     def generate_readme(self):
+        sections = [name for _, name in self.star_lists]
+        sections.append("未分类仓库")
         text = ""
 
         # 生成分类表格
@@ -131,12 +133,37 @@ class Stargazer:
 
         text += "\n"
 
+        toc = self.build_toc(sections)
+        if toc:
+            text = f"{toc}{text}"
+
         # 生成完整README
         with open(self.template, "r") as f:
             template = f.read()
 
         with open(self.output, "w") as f:
             f.write(template.replace("[[GENERATE HERE]]", text.strip()))
+
+    def build_toc(self, sections):
+        cleaned_sections = [section for section in sections if section]
+        if not cleaned_sections:
+            return ""
+        anchors = {}
+        toc_lines = ["## TOC", ""]
+        for section in cleaned_sections:
+            slug = self.slugify(section)
+            count = anchors.get(slug, 0)
+            unique_slug = slug if count == 0 else f"{slug}-{count}"
+            anchors[slug] = count + 1
+            toc_lines.append(f"- [{section}](#{unique_slug})")
+        toc_lines.append("")
+        return "\n".join(toc_lines)
+
+    def slugify(self, text):
+        slug = text.strip().lower()
+        slug = re.sub(r"[^\w\s-]", "", slug)
+        slug = re.sub(r"\s+", "-", slug)
+        return slug or "section"
 
 
 if __name__ == "__main__":

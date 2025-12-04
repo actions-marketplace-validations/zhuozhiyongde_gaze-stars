@@ -2,7 +2,7 @@
 
 [English](README.md) | [中文版](README.zh-CN.md)
 
-This GitHub Action queries the GitHub API to retrieve your starred repositories and generates a README sorted by your stargazed list.
+This GitHub Action queries the GitHub API to retrieve your starred repositories and generates a README sorted by your stargazed list. The generated README includes a Table of Contents before the categorized entries so you can jump to any section quickly.
 
 You can reference my repository [zhuozhiyongde / Stargazer](https://github.com/zhuozhiyongde/Stargazer)
 
