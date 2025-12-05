@@ -2,7 +2,7 @@
 
 [English](README.md) | [中文版](README.zh-CN.md)
 
-这个 GitHub Action 可以通过查询 GitHub API 以获取你标星的仓库们，然后按星标列表排序生成 README。
+这个 GitHub Action 可以通过查询 GitHub API 以获取你标星的仓库们，然后按星标列表排序生成 README，生成的内容会在开头自动加入目录，方便快速跳转到任意章节。
 
 你可以参考我的仓库 [zhuozhiyongde / Stargazer](https://github.com/zhuozhiyongde/Stargazer)
 
